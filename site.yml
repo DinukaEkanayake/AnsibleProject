@@ -23,3 +23,15 @@
         content: "Hello, Welcome"
         dest: /var/www/html/index.html
 
+- name: Install mysql server and php on dbservers
+  hosts: dbservers
+  become: true
+  tasks:
+    - name: Install mysql package
+      package:
+        name:
+          - mysql-server
+          - "{{ php_package }}"
+        state: present
+        update_cache: yes
+      when: ansible_distribution == 'Ubuntu'
