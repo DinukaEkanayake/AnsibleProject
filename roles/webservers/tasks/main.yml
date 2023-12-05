@@ -1,0 +1,23 @@
+- name: Install Nginx and Php packages
+  tags: nginx,ubuntu
+  package:
+    name:
+      - nginx
+      - "{{ php_package }}"
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Start Nginx service
+  service:
+    name: nginx
+    state: started
+
+- name: Copy html file
+  copy:
+    src: files/site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
+

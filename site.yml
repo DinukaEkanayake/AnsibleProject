@@ -1,42 +1,10 @@
 ---
-
-- name: Install nginx,php packages and start nginx to display webcontent on webservers
-  hosts: webservers
+- hosts: webservers
   become: true
-  tasks:
-    - name: Install Nginx and Php packages
-      tags: nginx,ubuntu
-      package:
-        name:
-          - nginx
-          - "{{ php_package }}"
-        state: latest
-        update_cache: yes
-      when: ansible_distribution == 'Ubuntu'
+  roles:
+    - webservers
 
-    - name: Start Nginx service
-      service:
-        name: nginx
-        state: started
-
-    - name: Copy html file
-      copy:
-        src: files/site.html
-        dest: /var/www/html/index.html
-        owner: root
-        group: root
-        mode: 0644
-
-- name: Install mysql server and php on dbservers
-  hosts: dbservers
+- hosts: dbservers
   become: true
-  tasks:
-    - name: Install mysql package
-      tags: db,mysql,ubuntu
-      package:
-        name:
-          - mysql-server
-          - "{{ php_package }}"
-        state: present
-        update_cache: yes
-      when: ansible_distribution == 'Ubuntu'
+  roles:
+    - dbservers  

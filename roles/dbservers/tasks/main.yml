@@ -1,0 +1,9 @@
+- name: Install mysql package
+  tags: db,mysql,ubuntu
+  package:
+    name:
+      - mysql-server
+      - "{{ php_package }}"
+    state: present
+    update_cache: yes
+  when: ansible_distribution == 'Ubuntu'
