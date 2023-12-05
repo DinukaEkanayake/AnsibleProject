@@ -19,10 +19,13 @@
         name: nginx
         state: started
 
-    - name: Create Content
+    - name: Copy html file
       copy:
-        content: "Hello, Welcome"
+        src: files/site.html
         dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
 
 - name: Install mysql server and php on dbservers
   hosts: dbservers
