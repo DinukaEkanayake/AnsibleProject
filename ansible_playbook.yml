@@ -10,7 +10,7 @@
           - "{{ php_package }}"
         state: latest
         update_cache: yes
-      when: ansbile_distribution == 'Ubuntu"
+      when: ansible_distribution == 'Ubuntu'
 
     - name: Start Nginx service
       service:
