@@ -1,5 +1,5 @@
 [webservers]
-10.0.2.4
+10.0.2.4 php_package=libapache2-mod-php
 
 [dbservers]
-10.0.2.5
+10.0.2.5 php_package=libapache2-mod-php
