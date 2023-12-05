@@ -5,6 +5,7 @@
   become: true
   tasks:
     - name: Install Nginx and Php packages
+      tags: nginx,ubuntu
       package:
         name:
           - nginx
@@ -28,6 +29,7 @@
   become: true
   tasks:
     - name: Install mysql package
+      tags: db,mysql,ubuntu
       package:
         name:
           - mysql-server
