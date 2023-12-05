@@ -1,0 +1,25 @@
+---
+
+- name: Install nginx,php packages and start nginx to display webcontent on webservers
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Install Nginx and Php packages
+      package:
+        name:
+          - nginx
+          - "{{ php_package }}"
+        state: latest
+        update_cache: yes
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+
+    - name: Create Content
+      copy:
+        content: "Hello, Welcome"
+        dest: /var/www/html/index.html
+
