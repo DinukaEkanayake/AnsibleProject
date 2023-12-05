@@ -6,10 +6,15 @@
     - name: Install Nginx
       apt:
         name: nginx
-        state: present
+        state: latest
       when: ansbile_distribution == 'Ubuntu"
 
     - name: Start Nginx service
       service:
         name: nginx
         state: started
+
+    - name: Create Content
+      copy:
+        content: "Hello, Welcome"
+        dest: /var/www/html/index.html
